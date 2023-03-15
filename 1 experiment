@@ -1,3 +1,4 @@
+1.
 create table EMPLFahmidha-pa-patch-1OYEE(emp_id int primary key,name varchar(20),city varchar(20),dob date,adhar_no int);Fahmidha-pa-patch-1
 Query OK, 0 rows affected (0.02 sec)
 
@@ -15,7 +16,7 @@ mysql> desc EMPLOYEE;
 
 
 
-
+2.
 create table STUDENT(roll_no int primary key,name varchar(20) not null,age int check(age<100),address varchar(40),gender varchar(20) default'm');
 Query OK, 0 rows affected (0.02 sec)
 
@@ -30,4 +31,26 @@ mysql> desc STUDENT;
 | gender  | varchar(20) | YES  |     | m       |       |
 +---------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
+
+
+
+3.
+create temporary table STUDENT1 select* from STUDENT;
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc STUDENT1;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   |     | NULL    | NULL  |
+| name    | varchar(20) | NO   |     | NULL    | NULL  |
+| age     | int         | YES  |     | NULL    | NULL  |
+| address | varchar(40) | YES  |     | NULL    | NULL  |
+| gender  | varchar(20) | YES  |     | m       | NULL  |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+
 
