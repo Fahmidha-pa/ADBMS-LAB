@@ -9,7 +9,19 @@ mysql> desc EMPLOYEE;
 | emp_id   | int         | NO   | PRI | NULL    |       |
 | name     | varchar(20) | YES  |     | NULL    |       |
 | city     | varchar(20) | YES  |     | NULL    |       |
-| dob      | date        | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |create table PRODUCT(Pid int primary key,pname varchar(20),price decimal(5,2) default 0);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc PRODUCT;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| Pid   | int          | NO   | PRI | NULL    |       |
+| pname | varchar(20)  | YES  |     | NULL    |       |
+| price | decimal(5,2) | YES  |     | 0.00    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
 | adhar_no | int         | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.01 sec)
@@ -93,7 +105,23 @@ mysql> desc CUSTOMER;
 | city    | varchar(20) | YES  |     | NULL    |       |
 | ph_no   | int         | YES  |     | NULL    |       |
 +---------+-------------+------+-----+---------+-------+
-5 rows in set (0.01 sec)
+5 rows in set (0.01 sec) 
+
+create table PRODUCT(Pid int primary key,pname varchar(20),price decimal(5,2) default 0);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc PRODUCT;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| Pid   | int          | NO   | PRI | NULL    |       |
+| pname | varchar(20)  | YES  |     | NULL    |       |
+| price | decimal(5,2) | YES  |     | 0.00    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+
+
 
 
 
