@@ -1,0 +1,14 @@
+create table EMPLFahmidha-pa-patch-1OYEE(emp_id int primary key,name varchar(20),city varchar(20),dob date,adhar_no int);Fahmidha-pa-patch-1
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int         | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
