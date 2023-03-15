@@ -121,6 +121,23 @@ mysql> desc PRODUCT;
 3 rows in set (0.01 sec)
 
 
+create table Invoice_master(inv_id int primary key,id int,inv_date date,foreign key(id) references CUSTOMER(id));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc Invoice_master;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| inv_id   | int  | NO   | PRI | NULL    |       |
+| id       | int  | YES  | MUL | NULL    |       |
+| inv_date | date | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+
+
+
 
 
 
