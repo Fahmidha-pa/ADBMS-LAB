@@ -1,7 +1,7 @@
                                           EXP 1.1: DDL COMMANDS
                                            *********************
 
-
+7. Delete the table STUDENT1.
  a) DDL COMMANDS-CREATE
   \\1.  QUESTION Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)
 
@@ -71,7 +71,7 @@ mysql> desc STUDENT1;
 
 
 //4.QUESTION Create a duplicate table of EMPLOYEE.
-
+7. Delete the table STUDENT1.
 mysql> create table if not exists EMPLOYEE_DUP select *from EMPLOYEE;
 Query OK, 0 rows affected (0.02 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -277,6 +277,8 @@ mysql> DESC PERSON;
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
 
+
+//7.QUESTION    Delete the table STUDENT1.
 
 
 
