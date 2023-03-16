@@ -278,7 +278,26 @@ mysql> DESC PERSON;
 5 rows in set (0.00 sec)
 
 
-//7.QUESTION    Delete the table STUDENT1.
+//7.QUESTION    Delete the table EMPLOYEE_DUP
+
+mysql> DROP TABLE EMPLOYEE_DUP;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_femi |
++----------------+
+| PERSON         |
+| STUDENT        |
+| book           |
+| customer       |
+| order1         |
+| person         |
+| student1       |
+| teacher        |
++----------------+
+8 rows in set (0.00 sec)
+
 
 
 
