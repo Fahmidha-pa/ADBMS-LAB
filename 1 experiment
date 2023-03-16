@@ -1,4 +1,9 @@
-1.
+                                          EXP 1.1: DDL COMMANDS
+                                           *********************
+
+
+
+1.QUESTION???????????????????
 create table EMPLFahmidha-pa-patch-1OYEE(emp_id int primary key,name varchar(20),city varchar(20),dob date,adhar_no int);Fahmidha-pa-patch-1
 Query OK, 0 rows affected (0.02 sec)
 
@@ -212,7 +217,8 @@ mysql> desc Invoice_item;
 
 
 
-
+//ADD QUESTION
+//ADD MYSQL> BEFORE EACH QUERY
 
 
 
