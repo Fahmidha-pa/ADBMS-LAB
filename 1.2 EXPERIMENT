@@ -4,8 +4,11 @@ a) DML COMMANDS-INSERT
 
          //1.QUESTION      Insert values in EMPLOYEE table.
          
- mysql> insert into EMPLOYEE values(001,"femi","chavakkad",2002,4123),(002,"kuttu","vayanad",2000,5649),(003,"nili","iritty",1999,2367),
- (004,"hiba","manjeri",2000,4143),(005,"aali","ernamkulam",2001,5659);
+ mysql> insert into EMPLOYEE values(001,"femi","chavakkad",2002,4123),
+ (002,"kuttu","vayanad",2000,5649),
+ (003,"nili","iritty",1999,2367),
+ (004,"hiba","manjeri",2000,4143),
+ (005,"aali","ernamkulam",2001,5659);
 Query OK, 3 rows affected (0.00 sec)
 
 
@@ -24,8 +27,11 @@ Query OK, 3 rows affected (0.00 sec)
  
              //2.QUESTION      Insert values in STUDENT table.
 
- mysql> INSERT INTO STUDENT VALUES(001,'fahmidha',20,'trissur','f'),(002,'nileena',23,'kannur','f'),(003,'karthik',22,'malappuram','m'),
-       (004,'hari',23,'palakkad','m'),(005,'fidha',21,'mahi','f');
+ mysql> INSERT INTO STUDENT VALUES(001,'fahmidha',20,'trissur','f'),
+ (002,'nileena',23,'kannur','f'),
+ (003,'karthik',22,'malappuram','m'),
+  (004,'hari',23,'palakkad','m'),
+  (005,'fidha',21,'mahi','f');
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
@@ -42,4 +48,53 @@ mysql> select *from STUDENT;
 5 rows in set (0.00 sec)
 
       
-               //3.QUESTION      Insert values in INVOICE database. 
+               //3.QUESTION      Insert values in INVOICE database.
+               
+               
+mysql> use INVOICE
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_INVOICE |
++-------------------+
+| CUSTOMER          |
+| INVOICE_ITEM      |
+| INVOICE_MASTER    |
+| PRODUCT           |
++-------------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO CUSTOMER VALUES(001,"FARHA","PALLATH","CHAVAKKAD",7025264510),
+(002,"NAFEEHA","PARANILATH","NARIKKUNI",8606350834),
+(003,"SHADHIYA","VALIYAKATH","VELIYANCODE",7045664510),
+(004,"SHANA","POLLAKKAYIL","ANJANGADI",7025265679),
+(005,"MISBAH","MIZAJ MANZIL","VADANAPPALLY",7025264534),
+(006,"MUFEEDHA","PALLIKKADAVATH","PADANILAM",7024567510),
+(007,"FEBNA","PRAVIL","KODUVALLY",7025278910);
+Query OK, 7 rows affected (0.00 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+
+mysql> SELECT *FROM CUSTOMER;
++----+----------+----------------+--------------+------------+
+| ID | NAME     | ADDRESS        | CITY         | PH_N0      |
++----+----------+----------------+--------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD    | 7025264510 |
+|  2 | NAFEEHA  | PARANILATH     | NARIKKUNI    | 8606350834 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE  | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI    | 7025265679 |
+|  5 | MISBAH   | MIZAJ MANZIL   | VADANAPPALLY | 7025264534 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | PADANILAM    | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY    | 7025278910 |
++----+----------+----------------+--------------+------------+
+7 rows in set (0.00 sec)
+
+
+
+
+
+
+            
