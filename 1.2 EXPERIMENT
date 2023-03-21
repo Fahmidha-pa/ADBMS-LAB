@@ -4,6 +4,23 @@ a) DML COMMANDS-INSERT
 
          //1.QUESTION      Insert values in EMPLOYEE table.
          
+ mysql> insert into EMPLOYEE values(001,"femi","chavakkad",2002,4123),(002,"kuttu","vayanad",2000,5649),(003,"nili","iritty",1999,2367),(004,"hiba","manjeri",2000,4143),(005,"aali","ernamkulam",2001,5659);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+
+        mysql> select *from EMPLOYEE;
++------+-------+------------+------+----------+
+| SSN  | name  | city       | dob  | adhar_no |
++------+-------+------------+------+----------+
+|    1 | femi  | chavakkad  | 2002 |     4123 |
+|    2 | kuttu | vayanad    | 2000 |     5649 |
+|    3 | nili  | iritty     | 1999 |     2367 |
+|    4 | hiba  | manjeri    | 2000 |     4143 |
+|    5 | aali  | ernamkulam | 2001 |     5659 |
++------+-------+------------+------+----------+
+5 rows in set (0.00 sec)
  
-                       2.      Insert values in STUDENT table.
+ 
+             //2.      Insert values in STUDENT table.
                        3.      Insert values in INVOICE database. 
