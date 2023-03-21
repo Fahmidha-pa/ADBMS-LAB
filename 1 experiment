@@ -1,7 +1,6 @@
                                           EXP 1.1: DDL COMMANDS
                                            *********************
 
-7. Delete the table STUDENT1.
  a) DDL COMMANDS-CREATE
   \\1.  QUESTION Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)
 
