@@ -24,7 +24,8 @@ Query OK, 3 rows affected (0.00 sec)
  
              //2.QUESTION      Insert values in STUDENT table.
 
-       mysql> INSERT INTO STUDENT VALUES(001,'fahmidha',20,'trissur','f'),(002,'nileena',23,'kannur','f'),(003,'karthik',22,'malappuram','m'),(004,'hari',23,'palakkad','m'),(005,'fidha',21,'mahi','f');
+ mysql> INSERT INTO STUDENT VALUES(001,'fahmidha',20,'trissur','f'),(002,'nileena',23,'kannur','f'),(003,'karthik',22,'malappuram','m'),
+       (004,'hari',23,'palakkad','m'),(005,'fidha',21,'mahi','f');
 Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
@@ -39,5 +40,6 @@ mysql> select *from STUDENT;
 |       5 | fidha    |   21 | mahi       | f      |
 +---------+----------+------+------------+--------+
 5 rows in set (0.00 sec)
+
       
-                       3.      Insert values in INVOICE database. 
+               //3.QUESTION      Insert values in INVOICE database. 
