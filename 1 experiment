@@ -70,7 +70,8 @@ mysql> desc STUDENT1;
 
 
 //4.QUESTION Create a duplicate table of EMPLOYEE.
-7. Delete the table STUDENT1.
+
+
 mysql> create table if not exists EMPLOYEE_DUP select *from EMPLOYEE;
 Query OK, 0 rows affected (0.02 sec)
 Records: 0  Duplicates: 0  Warnings: 0
