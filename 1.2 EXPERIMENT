@@ -190,6 +190,22 @@ mysql> SELECT *FROM INVOICE_ITEM;
 
 
 
+b)DML COMMANDS- UPDATE
+
+
+
+ //1. Update the price of a particular product.
+ 
+                      
+                      2. Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table. 
+                      3. Update all prices with 2% of its original price. 
+                      4. Change the address, city, phone number of a particular customer. 
+                      5. Change the quantity of a purchased product of inv_id ‘101’
+
+
+
+
+
 
 
 
