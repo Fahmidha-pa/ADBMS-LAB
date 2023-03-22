@@ -340,12 +340,51 @@ mysql> SELECT *FROM CUSTOMER;
 
   
  
- 5. Change the quantity of a purchased product of inv_id ‘101’
+ 5. Change the quantity of a purchased product of inv_id ‘501'
+
+mysql> SELECT *FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |        2 |
+|    502 |  103 |        3 |
+|    502 |  101 |        1 |
+|    504 |  104 |        1 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+7 rows in set (0.00 sec)
+
+mysql> UPDATE INVOICE_ITEM SET QUANTITY=10 WHERE INV_ID=501;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT *FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    502 |  103 |        3 |
+|    502 |  101 |        1 |
+|    504 |  104 |        1 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+7 rows in set (0.00 sec)
 
 
 
 
-
+c) DML COMMAND- DELETE
+                 1. Delete the record of customer id ‘10001’
+                 
+                      2. Delete all purchase details of items its quantity less than 2. 
+                      3. Delete the purchase details of product ‘pen’ in the in_id ‘101’. 
+                      4. Delete details of employees who does not have phone number. 
+                      5. Delete all records from STUDENT table. 
+                      6. Delete Invoice details of a particular customer.
 
 
 
