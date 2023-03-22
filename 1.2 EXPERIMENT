@@ -231,7 +231,41 @@ mysql> SELECT *FROM PRODUCT;
 
 
                       
-    //2. Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table. 
+    //2. Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table.
+    
+    
+    mysql> SELECT *FROM CUSTOMER;
++----+----------+----------------+--------------+------------+
+| ID | NAME     | ADDRESS        | CITY         | PH_N0      |
++----+----------+----------------+--------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD    | 7025264510 |
+|  2 | NAFEEHA  | PARANILATH     | KOZHIKKODE   | 8606350834 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE  | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI    | 7025265679 |
+|  5 | MISBAH   | MIZAJ MANZIL   | VADANAPPALLY | 7025264534 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | CALICUT      | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY    | 7025278910 |
++----+----------+----------------+--------------+------------+
+7 rows in set (0.00 sec)
+
+mysql> UPDATE CUSTOMER SET CITY="KOZHIKKODE" WHERE CITY="CALICUT";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT *FROM CUSTOMER;
++----+----------+----------------+--------------+------------+
+| ID | NAME     | ADDRESS        | CITY         | PH_N0      |
++----+----------+----------------+--------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD    | 7025264510 |
+|  2 | NAFEEHA  | PARANILATH     | KOZHIKKODE   | 8606350834 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE  | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI    | 7025265679 |
+|  5 | MISBAH   | MIZAJ MANZIL   | VADANAPPALLY | 7025264534 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE   | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY    | 7025278910 |
++----+----------+----------------+--------------+------------+
+7 rows in set (0.00 sec)
+
                       3. Update all prices with 2% of its original price. 
                       4. Change the address, city, phone number of a particular customer. 
                       5. Change the quantity of a purchased product of inv_id ‘101’
