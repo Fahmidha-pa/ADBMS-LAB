@@ -266,7 +266,43 @@ mysql> SELECT *FROM CUSTOMER;
 +----+----------+----------------+--------------+------------+
 7 rows in set (0.00 sec)
 
-                      3. Update all prices with 2% of its original price. 
+         //3. Update all prices with 2% of its original price.
+         
+         
+  mysql> SELECT *FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.00 |
+| 102 | SOAP POWDER |  80.00 |
+| 103 | BODY LOTION | 300.00 |
+| 104 | SHAMPOO     | 700.50 |
+| 105 | CONDITIONER | 700.00 |
+| 106 | CHOCLATE    | 300.50 |
+| 107 | NUTS        | 600.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+         
+ mysql> UPDATE PRODUCT SET PRICE=PRICE+(PRICE*2/100);
+Query OK, 7 rows affected (0.00 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> SELECT *FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+                      
+                      
                       4. Change the address, city, phone number of a particular customer. 
                       5. Change the quantity of a purchased product of inv_id ‘101’
 
