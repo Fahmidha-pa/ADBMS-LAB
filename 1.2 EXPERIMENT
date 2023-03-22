@@ -196,8 +196,42 @@ b)DML COMMANDS- UPDATE
 
  //1. Update the price of a particular product.
  
+ 
+ mysql> SELECT *FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.00 |
+| 102 | SOAP POWDER |  80.00 |
+| 103 | BODY LOTION | 300.00 |
+| 104 | SHAMPOO     | 700.50 |
+| 105 | CONDITIONER | 700.00 |
+| 106 | CHOCLATE    | 300.50 |
+| 107 | NUTS        | 600.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> UPDATE PRODUCT SET PRICE=200 WHERE PID=105;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT *FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.00 |
+| 102 | SOAP POWDER |  80.00 |
+| 103 | BODY LOTION | 300.00 |
+| 104 | SHAMPOO     | 700.50 |
+| 105 | CONDITIONER | 200.00 |
+| 106 | CHOCLATE    | 300.50 |
+| 107 | NUTS        | 600.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+
                       
-                      2. Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table. 
+    //2. Change the name of city ‘calicut’ to ‘kozhikode’ in the customer table. 
                       3. Update all prices with 2% of its original price. 
                       4. Change the address, city, phone number of a particular customer. 
                       5. Change the quantity of a purchased product of inv_id ‘101’
