@@ -79,6 +79,80 @@ mysql> SELECT*FROM EMPLOYEE;
 ----------------------------------------------------------------------------------------------------------------------------
 //3.    Savepoint
 
+
+mysql> SELECT*FROM EMPLOYEE;
++------+-------+------------+------+----------+
+| SSN  | name  | city       | dob  | adhar_no |
++------+-------+------------+------+----------+
+|    1 | femi  | chavakkad  | 2002 |     4123 |
+|    2 | kuttu | vayanad    | 2000 |     5649 |
+|    3 | nili  | iritty     | 1999 |     2367 |
+|    4 | hiba  | manjeri    | 2000 |     4143 |
+|    5 | aali  | ernamkulam | 2001 |     5659 |
+|    6 | fida  | mahi       | 1998 |     2344 |
++------+-------+------------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(7,'sreya','kunnamkulam',2001,2384);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++------+-------+------------+------+----------+
+| SSN  | name  | city       | dob  | adhar_no |
++------+-------+------------+------+----------+
+|    1 | femi  | chavakkad  | 2002 |     4123 |
+|    2 | kuttu | vayanad    | 2000 |     5649 |
+|    3 | nili  | iritty     | 1999 |     2367 |
+|    4 | hiba  | manjeri    | 2000 |     4143 |
+|    5 | aali  | ernamkulam | 2001 |     5659 |
+|    6 | fida  | mahi       | 1998 |     2344 |
++------+-------+------------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(7,'maanas','thamarassery',1999,4567);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SAVEPOINT A;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(8,'ashwathi','vadakara',1996,2347);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(9,'aswin','omassery',1999,2587);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT c;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++------+----------+--------------+------+----------+
+| SSN  | name     | city         | dob  | adhar_no |
++------+----------+--------------+------+----------+
+|    1 | femi     | chavakkad    | 2002 |     4123 |
+|    2 | kuttu    | vayanad      | 2000 |     5649 |
+|    3 | nili     | iritty       | 1999 |     2367 |
+|    4 | hiba     | manjeri      | 2000 |     4143 |
+|    5 | aali     | ernamkulam   | 2001 |     5659 |
+|    6 | fida     | mahi         | 1998 |     2344 |
+|    7 | maanas   | thamarassery | 1999 |     4567 |
+|    8 | ashwathi | vadakara     | 1996 |     2347 |
+|    9 | aswin    | omassery     | 1999 |     2587 |
++------+----------+--------------+------+----------+
+9 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO B;
+Query OK, 0 rows affected (0.00 sec)
+
+
 b) DCL COMMAND
           Create two users user1, user2
          1.      GRANT
