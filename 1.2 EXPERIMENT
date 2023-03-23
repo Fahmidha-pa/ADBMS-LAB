@@ -551,14 +551,43 @@ mysql> select *from STUDENT;
 Empty set (0.00 sec)
 
      
-     //6. Delete Invoice details of a particular customer.
+ //6. Delete Invoice details of a particular customer.
+     
+
+
+mysql> select *from INVOICE_MASTER;
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    504 |    4 | 2023-02-12 |
+|    505 |    6 | 2023-02-14 |
+|    506 |    4 | 2023-03-12 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+7 rows in set (0.00 sec)
+
+
+mysql> DELETE FROM INVOICE_MASTER WHERE ID=4;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select *from INVOICE_MASTER;
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+5 rows in set (0.00 sec)
 
 
 
 
-
-
- 1. Delete the record of customer id ‘10001’
 
 
             
