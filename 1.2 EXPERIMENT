@@ -394,15 +394,25 @@ c) DML COMMAND- DELETE
 +----+----------+----------------+-------------+------------+
 7 rows in set (0.00 sec)
 
-mysql> DELETE FROM CUSTOMER WHERE ID=1;
-ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`INVOICE`.`INVOICE_MASTER`, CONSTRAINT `INVOICE_MASTER_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `CUSTOMER` (`ID`))
-mysql> 
+mysql> DELETE FROM CUSTOMER WHERE ID=2;
+Query OK, 1 row affected (0.00 sec)
 
-
-                
+mysql> select *from CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+    
                  
                  
-                      2. Delete all purchase details of items its quantity less than 2. 
+  //2. Delete all purchase details of items its quantity less than 2. 
                       3. Delete the purchase details of product ‘pen’ in the in_id ‘101’. 
                       4. Delete details of employees who does not have phone number. 
                       5. Delete all records from STUDENT table. 
