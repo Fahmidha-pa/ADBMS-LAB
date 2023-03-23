@@ -494,11 +494,9 @@ mysql> select *from INVOICE_ITEM;
        
        
        
-       
-       
-       
-                      4. Delete details of employees who does not have phone number. 
-                      5. Delete all records from STUDENT table. 
+       //4. Delete details of employees who does not have phone number. 
+                      
+        //5. Delete all records from STUDENT table. 
                       6. Delete Invoice details of a particular customer.
 
 
