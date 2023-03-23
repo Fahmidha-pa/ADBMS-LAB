@@ -1,0 +1,12 @@
+a) TCL COMMANDS
+           1.    Commit
+           2.    Rollback
+           3.    Savepoint
+
+b) DCL COMMAND
+          Create two users user1, user2
+         1.      GRANT
+                    ->Give insert and select privilege to user 1 on customer table in the invoice database.
+                    ->Give update and delete privilege to user 2 on all tables in the invoice database.
+        2.      REVOKE
+                   ->Remove delete privilege of user 2.
