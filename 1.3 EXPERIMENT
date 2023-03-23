@@ -1,6 +1,63 @@
 a) TCL COMMANDS
-           1.    Commit
-           2.    Rollback
+           
+           //1.    Commit
+           
+mysql> use femi;
+Database changed
+mysql> SET AUTOCOMMIT=OFF;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_femi |
++----------------+
+| EMPLOYEE       |
+| STUDENT        |
+| book           |
+| customer       |
+| order1         |
+| person         |
+| student1       |
+| teacher        |
++----------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++------+-------+------------+------+----------+
+| SSN  | name  | city       | dob  | adhar_no |
++------+-------+------------+------+----------+
+|    1 | femi  | chavakkad  | 2002 |     4123 |
+|    2 | kuttu | vayanad    | 2000 |     5649 |
+|    3 | nili  | iritty     | 1999 |     2367 |
+|    4 | hiba  | manjeri    | 2000 |     4143 |
+|    5 | aali  | ernamkulam | 2001 |     5659 |
++------+-------+------------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(6,'fida','mahi',1998,2344);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT*FROM EMPLOYEE;
++------+-------+------------+------+----------+
+| SSN  | name  | city       | dob  | adhar_no |
++------+-------+------------+------+----------+
+|    1 | femi  | chavakkad  | 2002 |     4123 |
+|    2 | kuttu | vayanad    | 2000 |     5649 |
+|    3 | nili  | iritty     | 1999 |     2367 |
+|    4 | hiba  | manjeri    | 2000 |     4143 |
+|    5 | aali  | ernamkulam | 2001 |     5659 |
+|    6 | fida  | mahi       | 1998 |     2344 |
++------+-------+------------+------+----------+
+6 rows in set (0.00 sec)
+
+           
+           //2.    Rollback
+           
+           
+           
            3.    Savepoint
 
 b) DCL COMMAND
