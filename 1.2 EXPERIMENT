@@ -530,8 +530,28 @@ mysql> select *from CUSTOMER;
 
        
                       
-      //5. Delete all records from STUDENT table. 
-                      6. Delete Invoice details of a particular customer.
+    //5. Delete all records from STUDENT table.
+      
+  mysql> select *from STUDENT;
++---------+----------+------+------------+--------+
+| roll_no | name     | AGE  | address    | gender |
++---------+----------+------+------------+--------+
+|       1 | fahmidha |   20 | trissur    | f      |
+|       2 | nileena  |   23 | kannur     | f      |
+|       3 | karthik  |   22 | malappuram | m      |
+|       4 | hari     |   23 | palakkad   | m      |
+|       5 | fidha    |   21 | mahi       | f      |
++---------+----------+------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> DELETE FROM STUDENT;
+Query OK, 5 rows affected (0.01 sec)
+
+mysql> select *from STUDENT;
+Empty set (0.00 sec)
+
+     
+     //6. Delete Invoice details of a particular customer.
 
 
 
