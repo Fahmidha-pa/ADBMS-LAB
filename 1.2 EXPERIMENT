@@ -445,7 +445,7 @@ mysql> select *from INVOICE_ITEM;
 5 rows in set (0.00 sec)
 
                 
-       //3. Delete the purchase details of product ‘pen’ in the in_id ‘101’.
+       //3. Delete the purchase details of product ‘BODY LOTION’ in the inv_id ‘502’.
        
        
  mysql> select *from PRODUCT;;
@@ -474,6 +474,22 @@ mysql> select *from INVOICE_ITEM;
 |    507 |  107 |        6 |
 +--------+------+----------+
 5 rows in set (0.00 sec)
+
+
+mysql> delete from INVOICE_ITEM WHERE INV_ID=502 AND PID=103;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
 
        
        
