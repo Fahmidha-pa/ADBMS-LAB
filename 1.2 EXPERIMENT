@@ -494,7 +494,23 @@ mysql> select *from INVOICE_ITEM;
        
        
        
-       //4. Delete details of employees who does not have phone number. 
+       //4. Delete details of employees who does not have phone number.
+       
+ mysql> select *from CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
++----+----------+----------------+-------------+------------+
+7 rows in set (0.00 sec)
+
+       
                       
         //5. Delete all records from STUDENT table. 
                       6. Delete Invoice details of a particular customer.
