@@ -153,6 +153,26 @@ mysql> ROLLBACK TO B;
 Query OK, 0 rows affected (0.00 sec)
 
 
+
+mysql> SELECT * FROM EMPLOYEE;
++------+--------+--------------+------+----------+
+| SSN  | name   | city         | dob  | adhar_no |
++------+--------+--------------+------+----------+
+|    1 | femi   | chavakkad    | 2002 |     4123 |
+|    2 | kuttu  | vayanad      | 2000 |     5649 |
+|    3 | nili   | iritty       | 1999 |     2367 |
+|    4 | hiba   | manjeri      | 2000 |     4143 |
+|    5 | aali   | ernamkulam   | 2001 |     5659 |
+|    6 | fida   | mahi         | 1998 |     2344 |
+|    7 | maanas | thamarassery | 1999 |     4567 |
++------+--------+--------------+------+----------+
+7 rows in set (0.00 sec)
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
 b) DCL COMMAND
           Create two users user1, user2
          1.      GRANT
