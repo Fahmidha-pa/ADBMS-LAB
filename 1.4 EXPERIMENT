@@ -1,1 +1,381 @@
+//1.List all customer details.
+ 
+ 
+ mysql> SELECT *FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+------------------------------------------------------------------------------------------------------
+  //2.    List pname, price of all products.
+  
+  mysql> SELECT PNAME,PRICE FROM PRODUCT;
++-------------+--------+
+| PNAME       | PRICE  |
++-------------+--------+
+| SOAP        |  35.70 |
+| SOAP POWDER |  81.60 |
+| BODY LOTION | 306.00 |
+| SHAMPOO     | 714.51 |
+| CONDITIONER | 204.00 |
+| CHOCLATE    | 306.51 |
+| NUTS        | 612.00 |
++-------------+--------+
+7 rows in set (0.01 sec)
+
+---------------------------------------------------------------------------------------------------------
+   //3.    List all invoice items, avoid duplicates.
+   
+   mysql> SELECT *FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT INV_ID FROM INVOICE_ITEM;
++--------+
+| INV_ID |
++--------+
+|    501 |
+|    505 |
+|    507 |
++--------+
+3 rows in set (0.00 sec)
+
+----------------------------------------------------------
+  //4.List product price between 100rs and 500rs
+  
+  mysql> SELECT * FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.01 sec)
+
+mysql> SELECT *FROM PRODUCT WHERE PRICE BETWEEN 100 AND 500;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 103 | BODY LOTION | 306.00 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
++-----+-------------+--------+
+3 rows in set (0.01 sec)
+
+---------------------------------------------------------------------------------------------------------
+   //5.    List the customer details who lives in ‘TRISSUR’,’KOZHIKKODE’.
+   
+   mysql> SELECT *FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT *FROM CUSTOMER WHERE CITY="TRISSUR"OR CITY="KOZHIKKODE";
++----+----------+----------------+------------+------------+
+| ID | NAME     | ADDRESS        | CITY       | PH_N0      |
++----+----------+----------------+------------+------------+
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR    | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE | 7024567510 |
++----+----------+----------------+------------+------------+
+2 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------
+   //6.List the invoice details from 1st January 2023 to 15th February 2023
+   
+   
+   mysql> SELECT *FROM INVOICE_MASTER;
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT *FROM INVOICE_MASTER WHERE INV_DATE BETWEEN 2023-01-01 AND 2023-02-14;
+Empty set, 2 warnings (0.00 sec)
+
+mysql> SELECT *FROM INVOICE_MASTER WHERE INV_DATE BETWEEN '2023-01-01' AND '2023-02-14';
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
++--------+------+------------+
+4 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------
+  //7. List the customer details who not live in ‘tvm’.
+  
+  
+  mysql> SELECT *FROM CUSTOMER WHERE CITY!="TRISSUR"; 
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+5 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------------------------
+  //8.    List the customers who have no phone number.
+  
+  mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT *FROM CUSTOMER WHERE PH_N0 IS NULL;
++----+--------+--------------+------------+-------+
+| ID | NAME   | ADDRESS      | CITY       | PH_N0 |
++----+--------+--------------+------------+-------+
+|  8 | ABDU   | THETTATH     | TRIVANDRUM | NULL  |
+|  9 | GAFOOR | VALIYAVEETIL | TRISSUR    | NULL  |
++----+--------+--------------+------------+-------+
+2 rows in set (0.00 sec)
+
+  
+------------------------------------------------------------------------------------------------------------------------- 
+ //9.    Display customer names in descending order.
+ 
+ mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+mysql>  SELECT *FROM CUSTOMER ORDER BY NAME DESC;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+ 
+--------------------------------------------------------------------------------------------------------------------- 
+//10. Display the customer details sorted in ascending by city and descending by names.
+
+mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT *FROM CUSTOMER ORDER BY CITY ASC,NAME DESC;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------
+ //11. Find the customer names start with ‘M’.
+ 
+ mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+mysql>  SELECT NAME FROM CUSTOMER WHERE NAME LIKE 'M%';
++----------+
+| NAME     |
++----------+
+| MISBAH   |
+| MUFEEDHA |
++----------+
+2 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------
+//12. Find the customer names who have ‘e’ or ‘a’ in them.
+
+ mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+
+mysql> SELECT NAME FROM CUSTOMER WHERE NAME LIKE '%I%' OR NAME LIKE'%F%';
++----------+
+| NAME     |
++----------+
+| FARHA    |
+| SHADHIYA |
+| MISBAH   |
+| MUFEEDHA |
+| FEBNA    |
+| GAFOOR   |
++----------+
+6 rows in set (0.00 sec)
+
+
+-----------------------------------------------------------------------------------------------
+  //13. Find the customer names who have at least 6 characters.
+  
+  mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+
+mysql> SELECT NAME FROM CUSTOMER WHERE NAME LIKE '______%';
++----------+
+| NAME     |
++----------+
+| SHADHIYA |
+| MISBAH   |
+| MUFEEDHA |
+| GAFOOR   |
++----------+
+4 rows in set (0.01 sec)
+
+  
+  
+------------------------------------------------------------------------------------------------------  
+//14. List the names of customers their names have ‘H’ in second position.
+
+
+ mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+
+mysql> SELECT NAME FROM CUSTOMER WHERE NAME LIKE '_H%';
++----------+
+| NAME     |
++----------+
+| SHADHIYA |
+| SHANA    |
++----------+
+2 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------
+//15. Find the customer names start with ‘F’ and are at least 3 characters in length.
+
+ mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
++----+----------+----------------+-------------+------------+
+6 rows in set (0.00 sec)
+
+
+mysql>  SELECT NAME FROM CUSTOMER WHERE NAME LIKE 'F___%';
++-------+
+| NAME  |
++-------+
+| FARHA |
+| FEBNA |
++-------+
+2 rows in set (0.00 sec)
 
