@@ -379,3 +379,4 @@ mysql>  SELECT NAME FROM CUSTOMER WHERE NAME LIKE 'F___%';
 +-------+
 2 rows in set (0.00 sec)
 
+//VERIFIED
