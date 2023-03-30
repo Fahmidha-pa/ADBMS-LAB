@@ -2,7 +2,7 @@
                                1.5  ACCESSING DATABASE: (SUBQUERY)
                                --------------------------------------
 
- //1.    List the customer names of invoice date 3rd February 2023. 
+ //1.    List the customer names of invoice date 14 February 2023. 
  
  mysql> SELECT * FROM INVOICE_MASTER;
 +--------+------+------------+
@@ -223,7 +223,7 @@ mysql> SELECT NAME FROM CUSTOMER WHERE ID IN(SELECT ID FROM INVOICE_MASTER WHERE
 
 
 ------------------------------------------------------------------------------------------------
- //6.    Display the purchased product details of the customer ’xyz’.
+ //6.    Display the purchased product details of the customer ’mufeedha’.
 
 
  mysql> SELECT * FROM CUSTOMER;
