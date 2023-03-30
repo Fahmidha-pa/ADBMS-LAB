@@ -1,1 +1,358 @@
 
+                               1.5  ACCESSING DATABASE: (SUBQUERY)
+                               --------------------------------------
+
+ //1.    List the customer names of invoice date 3rd February 2023. 
+ 
+ mysql> SELECT * FROM INVOICE_MASTER;
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT NAME FROM CUSTOMER WHERE ID IN(SELECT ID FROM INVOICE_MASTER WHERE INV_DATE='2023-02-14');
++----------+
+| NAME     |
++----------+
+| MUFEEDHA |
++----------+
+1 row in set (0.01 sec)
+ 
+-----------------------------------------------------------------------------------------------------------
+ //2.    List the product name and price of each invoice item.
+ 
+ mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+
+ 
+ mysql> SELECT PNAME,PRICE FROM PRODUCT WHERE PID IN(SELECT PID FROM INVOICE_ITEM);
++-------------+--------+
+| PNAME       | PRICE  |
++-------------+--------+
+| SOAP        |  35.70 |
+| BODY LOTION | 306.00 |
+| NUTS        | 612.00 |
++-------------+--------+
+3 rows in set (0.00 sec)
+-----------------------------------------------------------------------------------------------------------
+3.    List the product names, only include their purchased quantity more than 5.
+
+mysql> SELECT * FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+ 
+mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT PNAME FROM PRODUCT WHERE PID IN(SELECT PID FROM INVOICE_ITEM WHERE QUANTITY>5);
++-------+
+| PNAME |
++-------+
+| SOAP  |
+| NUTS  |
++-------+
+2 rows in set (0.01 sec)
+
+------------------------------------------------------------------------------------------------------------
+4.    Find the product that has no sale.
+
+mysql> SELECT * FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+ 
+mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT PNAME FROM PRODUCT WHERE PID NOT IN(SELECT PID FROM INVOICE_ITEM);
++-------------+
+| PNAME       |
++-------------+
+| SOAP POWDER |
+| SHAMPOO     |
+| CONDITIONER |
+| CHOCLATE    |
++-------------+
+4 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------
+     //5. List the customer names who purchased the items ‘NUTS’ and ‘SOAP POWDER’.
+
+mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM INVOICE_MASTER;
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT NAME FROM CUSTOMER WHERE ID IN(SELECT ID FROM INVOICE_MASTER WHERE INV_ID IN(SELECT INV_ID FROM INVOICE_ITEM WHERE PID IN(SELECT PID FROM PRODUCT WHERE PNAME='NUTS' OR(SELECT PID FROM PRODUCT WHERE PNAME='SOAP POWDER'))));
++----------+
+| NAME     |
++----------+
+| FARHA    |
+| MUFEEDHA |
+| FEBNA    |
++----------+
+3 rows in set (0.00 sec)
+
+
+------------------------------------------------------------------------------------------------
+ //6.    Display the purchased product details of the customer ’xyz’.
+
+
+ mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+ 
+ 
+ mysql> SELECT * FROM INVOICE_MASTER;
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT PNAME,PRICE FROM PRODUCT WHERE PID IN(SELECT PID FROM INVOICE_ITEM WHERE INV_ID IN (SELECT INV_ID FROM INVOICE_MASTER WHERE ID IN (SELECT ID FROM CUSTOMER WHERE NAME='MUFEEDHA')));
++-------------+--------+
+| PNAME       | PRICE  |
++-------------+--------+
+| BODY LOTION | 306.00 |
+| NUTS        | 612.00 |
++-------------+--------+
+2 rows in set (0.00 sec)
+
+
+-----------------------------------------------------------------------------------------------------------------------
+  // 7.    List the names of all customers who have purchased at least 2 products, make sure that no duplicate names in the result.
+  
+   mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+ 
+ 
+ mysql> SELECT * FROM INVOICE_MASTER;
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+  
+  
+  mysql> select name from CUSTOMER where ID in(select ID from INVOICE_MASTER where INV_ID in(select INV_ID from INVOICE_ITEM group by INV_ID hav
+ing count(INV_ID)>=2));
++----------+
+| name     |
++----------+
+| MUFEEDHA |
++----------+
+1 row in set (0.00 sec)
