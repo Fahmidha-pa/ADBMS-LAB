@@ -1,1 +1,71 @@
+                                      1.6  ACCESSING DATABASES: (VIEWS)
+                                      ---------------------------------
+                                      
+                                      
+1. Create a view for customers who have purchased products.
 
+
+
+mysql> CREATE VIEW CUST_VIEW AS SELECT NAME FROM CUSTOMER WHERE ID IN(SELECT ID FROM INVOICE_MASTER);
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM INVOICE_MASTER;
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM CUST_VIEW;
++----------+
+| NAME     |
++----------+
+| FARHA    |
+| SHADHIYA |
+| MUFEEDHA |
+| FEBNA    |
++----------+
+4 rows in set (0.00 sec)
+
+
+
+---------------------------------------------------------------------------------------------  
+
+2. Create a view for invoice products[cust_name, , inv_id, product_id, quantity] 
+
+mysql> create view INVOICE_Product as select CUSTOMER.NAME,INVOICE_MASTER.INV_ID,PRODUCT.PID,INVOICE_ITEM.QUANTITY from CUSTOMER INNER JOIN INVOICE_MASTER on CUSTOMER.ID=INVOICE_MASTER.ID INNER JOIN INVOICE_ITEM on INVOICE_MASTER.INV_ID=INVOICE_ITEM.INV_ID INNER JOIN PRODUCT on PRODUCT.PID=INVOICE_ITEM.PID;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from INVOICE_Product;
++----------+--------+-----+----------+
+| NAME     | INV_ID | PID | QUANTITY |
++----------+--------+-----+----------+
+| FARHA    |    501 | 101 |       10 |
+| MUFEEDHA |    505 | 103 |        4 |
+| MUFEEDHA |    505 | 107 |        5 |
+| FEBNA    |    507 | 107 |        6 |
++----------+--------+-----+----------+
+4 rows in set (0.00 sec)
+                                    
