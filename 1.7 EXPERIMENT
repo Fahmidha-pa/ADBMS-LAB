@@ -1,1 +1,151 @@
+                               EXPERIMENT NO: 1.7 OPTIMIZING DATABASE:  (GROUP BY, AGGREGATE FUNCTIONS)
+                                --------------------------------------------------------------------------
+ 
+ 
+ 
+ 
+ //1.List product name, price except SOAP POWDER on price order.
+
+mysql> select *from PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT PNAME,PRICE FROM PRODUCT WHERE PNAME!='SOAP POWDER' ORDER BY PRICE ASC;
++-------------+--------+
+| PNAME       | PRICE  |
++-------------+--------+
+| SOAP        |  35.70 |
+| CONDITIONER | 204.00 |
+| BODY LOTION | 306.00 |
+| CHOCLATE    | 306.51 |
+| NUTS        | 612.00 |
+| SHAMPOO     | 714.51 |
++-------------+--------+
+6 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------
+  //2.Find minimum, maximum and average price of products.
+
+mysql> select *from PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql>  SELECT MIN(PRICE),MAX(PRICE),AVG(PRICE) FROM PRODUCT;
++------------+------------+------------+
+| MIN(PRICE) | MAX(PRICE) | AVG(PRICE) |
++------------+------------+------------+
+|      35.70 |     714.51 | 322.902857 |
++------------+------------+------------+
+1 row in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------
+ //3.Find number of customers in each city.
+ 
+ mysql> select *from CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*),CITY FROM CUSTOMER GROUP BY CITY;
++----------+-------------+
+| COUNT(*) | CITY        |
++----------+-------------+
+|        1 | CHAVAKKAD   |
+|        1 | VELIYANCODE |
+|        1 | ANJANGADI   |
+|        2 | TRISSUR     |
+|        1 | KOZHIKKODE  |
+|        1 | KODUVALLY   |
+|        1 | TRIVANDRUM  |
++----------+-------------+
+7 rows in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------
+   //4. Find number of customers in each city, only include city with more than 1 customers.
+   
+mysql> select *from CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*), CITY FROM CUSTOMER GROUP BY CITY HAVING COUNT(*)>1;
++----------+---------+
+| COUNT(*) | CITY    |
++----------+---------+
+|        2 | TRISSUR |
++----------+---------+
+1 row in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------
+  //5. Show data as displayed ‘who, where’ Eg: ‘customer1 lives in ekm’.
+
+mysql> select *from CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(NAME," LIVES IN ",CITY)AS CUST_INFO FROM CUSTOMER;
++-------------------------------+
+| CUST_INFO                     |
++-------------------------------+
+| FARHA LIVES IN CHAVAKKAD      |
+| SHADHIYA LIVES IN VELIYANCODE |
+| SHANA LIVES IN ANJANGADI      |
+| MISBAH LIVES IN TRISSUR       |
+| MUFEEDHA LIVES IN KOZHIKKODE  |
+| FEBNA LIVES IN KODUVALLY      |
+| ABDU LIVES IN TRIVANDRUM      |
+| GAFOOR LIVES IN TRISSUR       |
++-------------------------------+
+8 rows in set (0.00 sec)
 
