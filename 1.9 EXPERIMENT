@@ -129,3 +129,4 @@ mysql> select PNAME from PRODUCT where PID in(select PID from INVOICE_ITEM where
 1 row in set (0.00 sec)
 
 
+//VERIFIED
