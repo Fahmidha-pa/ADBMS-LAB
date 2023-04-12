@@ -1,1 +1,131 @@
+                        EXPERIMENT NO: 1. : OPTIMIZING DATABASE: (Using Set, arithmetic, logical and special operators)
+                       *************************************************************************************************
+
+
+
+ //1.Display customer_id, city  who lives either in ‘TRISSUR’ or in ‘KOZHIKKODE’
+
+mysql> SELECT *FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT ID,CITY FROM CUSTOMER WHERE CITY='TRISSUR' OR CITY='KOZHIKKODE';
++----+------------+
+| ID | CITY       |
++----+------------+
+|  5 | TRISSUR    |
+|  6 | KOZHIKKODE |
+|  9 | TRISSUR    |
++----+------------+
+3 rows in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------
+  //2.Display product details with an updated price amount(new price= old price+5rs)
+
+mysql> SELECT *FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+  
+mysql> UPDATE PRODUCT SET PRICE=PRICE+5;
+Query OK, 7 rows affected (0.01 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> SELECT *FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  40.70 |
+| 102 | SOAP POWDER |  86.60 |
+| 103 | BODY LOTION | 311.00 |
+| 104 | SHAMPOO     | 719.51 |
+| 105 | CONDITIONER | 209.00 |
+| 106 | CHOCLATE    | 311.51 |
+| 107 | NUTS        | 617.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+ 
+ 
+--------------------------------------------------------------------------------------------------------------------
+  //3.Display customer details who doesn’t have phone number and lives in ‘Calicut’ city (use logical operators)
+  
+mysql> SELECT *FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from CUSTOMER where PH_N0 is null and CITY="TRISSUR";
++----+--------+--------------+---------+-------+
+| ID | NAME   | ADDRESS      | CITY    | PH_N0 |
++----+--------+--------------+---------+-------+
+|  9 | GAFOOR | VALIYAVEETIL | TRISSUR | NULL  |
++----+--------+--------------+---------+-------+
+1 row in set (0.00 sec)
+ 
+--------------------------------------------------------------------------------------------------------------------
+  //4.List the product names if it finds any records in the invoice items table has quantity =4 (use special operators)
+
+mysql> SELECT *FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  40.70 |
+| 102 | SOAP POWDER |  86.60 |
+| 103 | BODY LOTION | 311.00 |
+| 104 | SHAMPOO     | 719.51 |
+| 105 | CONDITIONER | 209.00 |
+| 106 | CHOCLATE    | 311.51 |
+| 107 | NUTS        | 617.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT *FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select PNAME from PRODUCT where PID in(select PID from INVOICE_ITEM where QUANTITY=4);
++-------------+
+| PNAME       |
++-------------+
+| BODY LOTION |
++-------------+
+1 row in set (0.00 sec)
+
 
