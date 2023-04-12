@@ -1,1 +1,117 @@
+                                 EXPERIMENT NO: 1.8 OPTIMIZING DATABASE: (JOINS)
+                                -----------------------------------------------
+
+
+
+
+mysql> SELECT *FROM CUSTOMER;
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT *FROM INVOICE_ITEM;
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *FROM INVOICE_MASTER;
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT *FROM PRODUCT;
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  35.70 |
+| 102 | SOAP POWDER |  81.60 |
+| 103 | BODY LOTION | 306.00 |
+| 104 | SHAMPOO     | 714.51 |
+| 105 | CONDITIONER | 204.00 |
+| 106 | CHOCLATE    | 306.51 |
+| 107 | NUTS        | 612.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+  //1.List the product name and quantity of invoice items.
+
+mysql> select PRODUCT.PNAME,INVOICE_ITEM.QUANTITY from PRODUCT inner join INVOICE_ITEM on PRODUCT.PID=INVOICE_ITEM.PID;
++-------------+----------+
+| PNAME       | QUANTITY |
++-------------+----------+
+| SOAP        |       10 |
+| BODY LOTION |        4 |
+| NUTS        |        5 |
+| NUTS        |        6 |
++-------------+----------+
+4 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------
+ //2. Display invoice details of the transaction dated ’14-02-2022’.
+ 
+mysql> select CUSTOMER.NAME,PRODUCT.PNAME,PRODUCT.PRICE,INVOICE_MASTER.INV_ID,INVOICE_MASTER.INV_DATE,INVOICE_ITEM.QUANTITY from CUSTOMER inner join INVOICE_MASTER on CUSTOMER.ID=INVOICE_MASTER.ID inner join INVOICE_ITEM on INVOICE_MASTER.INV_ID=INVOICE_ITEM.INV_ID Inner join PRODUCT  on PRODUCT.PID=INVOICE_ITEM.PID where INV_DATE='2023-02-14';
++----------+-------------+--------+--------+------------+----------+
+| NAME     | PNAME       | PRICE  | INV_ID | INV_DATE   | QUANTITY |
++----------+-------------+--------+--------+------------+----------+
+| MUFEEDHA | BODY LOTION | 306.00 |    505 | 2023-02-14 |        4 |
+| MUFEEDHA | NUTS        | 612.00 |    505 | 2023-02-14 |        5 |
++----------+-------------+--------+--------+------------+----------+
+2 rows in set (0.00 sec)
+
+
+-----------------------------------------------------------------------------------------------------
+  //3. Display the customer name, product name, invoice date of purchased item ‘SOAP’.
+
+mysql> select CUSTOMER.NAME,PRODUCT.PNAME,INVOICE_MASTER.INV_DATE from CUSTOMER inner join INVOICE_MASTER on CUSTOMER.ID=INVOICE_MASTER.ID inner join INVOICE_ITEM on INVOICE_MASTER.INV_ID=INVOICE_ITEM.INV_ID inner join PRODUCT on PRODUCT.PID=INVOICE_ITEM.PID where PNAME='SOAP';
++-------+-------+------------+
+| NAME  | PNAME | INV_DATE   |
++-------+-------+------------+
+| FARHA | SOAP  | 2023-01-01 |
++-------+-------+------------+
+1 row in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------
+  //4. Display all customer details and invoice details must include customer has not purchased items.
+  
+mysql>  select CUSTOMER.NAME,PRODUCT.PNAME,INVOICE_MASTER.INV_ID,INVOICE_MASTER.INV_DATE from CUSTOMER left join INVOICE_MASTER on CUSTOMER.ID=INVOICE_MASTER.ID left join INVOICE_ITEM on INVOICE_MASTER.INV_ID=INVOICE_ITEM.INV_ID left join PRODUCT on PRODUCT.PID=INVOICE_ITEM.PID;
++----------+-------------+--------+------------+
+| NAME     | PNAME       | INV_ID | INV_DATE   |
++----------+-------------+--------+------------+
+| FARHA    | SOAP        |    501 | 2023-01-01 |
+| SHADHIYA | NULL        |    502 | 2023-01-04 |
+| SHADHIYA | NULL        |    503 | 2023-01-15 |
+| SHANA    | NULL        |   NULL | NULL       |
+| MISBAH   | NULL        |   NULL | NULL       |
+| MUFEEDHA | BODY LOTION |    505 | 2023-02-14 |
+| MUFEEDHA | NUTS        |    505 | 2023-02-14 |
+| FEBNA    | NUTS        |    507 | 2023-02-19 |
+| ABDU     | NULL        |   NULL | NULL       |
+| GAFOOR   | NULL        |   NULL | NULL       |
++----------+-------------+--------+------------+
+10 rows in set (0.00 sec)
+
 
