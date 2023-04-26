@@ -1,1 +1,118 @@
+                            EXPERIMENT NO: 2.1	- PL/SQL PROGRAMS- STORED PROCEDURES
+                            ******************************************************** 
+
+
+//  1.Create a procedure to display all tables in the invoice database.
+
+mysql> DELIMITER &&
+mysql> CREATE PROCEDURE INVOICE_DATA()
+    -> BEGIN
+    -> SELECT *FROM CUSTOMER;
+    -> SELECT * FROM PRODUCT;
+    -> SELECT *FROM INVOICE_MASTER;
+    -> SELECT *FROM INVOICE_ITEM;
+    -> END &&
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> CALL INVOICE_DATA(); &&
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  40.70 |
+| 102 | SOAP POWDER |  86.60 |
+| 103 | BODY LOTION | 311.00 |
+| 104 | SHAMPOO     | 719.51 |
+| 105 | CONDITIONER | 209.00 |
+| 106 | CHOCLATE    | 311.51 |
+| 107 | NUTS        | 617.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
++--------+------+------------+
+| INV_ID | ID   | INV_DATE   |
++--------+------+------------+
+|    501 |    1 | 2023-01-01 |
+|    502 |    3 | 2023-01-04 |
+|    503 |    3 | 2023-01-15 |
+|    505 |    6 | 2023-02-14 |
+|    507 |    7 | 2023-02-19 |
++--------+------+------------+
+5 rows in set (0.00 sec)
+
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|    501 |  101 |       10 |
+|    505 |  103 |        4 |
+|    505 |  107 |        5 |
+|    507 |  107 |        6 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+
+---------------------------------------------------------------------------------
+//  2.Create a procedure to find greatest of 3 numbers.
+
+mysql> create procedure greatest_no(a int,b int,c int) 
+    -> begin
+    -> if(a>b) and (a>c) then  
+    -> select a as 'Greatest';  
+    -> elseif(b>a) and (b>c) then
+    -> select b as 'Greatest';   
+    -> else   
+    -> select c as 'Greatest';  
+    -> end if;  
+    -> end **
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call greatest_no(-19,50,100)
+    -> **
++----------+
+| Greatest |
++----------+
+|      100 |
++----------+
+1 row in set (0.00 sec)
+
+---------------------------------------------------------------------------------
+//  3.Create a procedure to display invoice details of a particular customer.
+
+mysql> delimiter //
+mysql> create procedure details11(N varchar(30))
+    -> begin
+    -> select CUSTOMER.NAME,INVOICE_MASTER.*,PRODUCT.PNAME,INVOICE_ITEM.PID,INVOICE_ITEM.QUANTITY from INVOICE_ITEM inner join INVOICE_MASTERon INVOICE_MASTER.INV_ID=INVOICE_ITEM.INV_ID inner join PRODUCT on PRODUCT.PID=INVOICE_ITEM.PID inner join CUSTOMER on CUSTOMER.ID=INVOICE_MASTER.ID WHERE CUSTOMER.NAME=N;
+    -> end //
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> call details11('FARHA');
+    -> //
++-------+--------+------+------------+-------+------+----------+
+| NAME  | INV_ID | ID   | INV_DATE   | PNAME | PID  | QUANTITY |
++-------+--------+------+------------+-------+------+----------+
+| FARHA |    501 |    1 | 2023-01-01 | SOAP  |  101 |       10 |
++-------+--------+------+------------+-------+------+----------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+
+
 
