@@ -1,1 +1,120 @@
+                             EXPERIMENT NO: 2.3	-PL/SQL PROGRAMS – TRIGGER
+                           -----------------------------------------------
+
+1. Create a trigger to handle updates to the customer table.
+
+mysql> delimiter //
+mysql> create table customer_1(id int,name varchar(20),address varchar(30),vity varchar(25),phno bigint);
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create trigger updaters
+    -> before update on CUSTOMER
+    -> for each row
+    -> begin
+    -> insert into customer_1 values(old.ID,old.NAME,old.ADDRESS,old.CITY,old.PH_N0);
+    -> end
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from CUSTOMER;
+    -> //
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | CHAVAKKAD   | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+mysql> update CUSTOMER set city="ERANAKULAM" where ID=1;
+    -> //
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from customer_1;
+    -> //
++------+-------+---------+-----------+------------+
+| id   | name  | address | vity      | phno       |
++------+-------+---------+-----------+------------+
+|    1 | FARHA | PALLATH | CHAVAKKAD | 7025264510 |
++------+-------+---------+-----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select *from CUSTOMER;
+    -> //
++----+----------+----------------+-------------+------------+
+| ID | NAME     | ADDRESS        | CITY        | PH_N0      |
++----+----------+----------------+-------------+------------+
+|  1 | FARHA    | PALLATH        | ERANAKULAM  | 7025264510 |
+|  3 | SHADHIYA | VALIYAKATH     | VELIYANCODE | 7045664510 |
+|  4 | SHANA    | POLLAKKAYIL    | ANJANGADI   | 7025265679 |
+|  5 | MISBAH   | PALLATH HOUSE  | TRISSUR     | 6578945367 |
+|  6 | MUFEEDHA | PALLIKKADAVATH | KOZHIKKODE  | 7024567510 |
+|  7 | FEBNA    | PRAVIL         | KODUVALLY   | 7025278910 |
+|  8 | ABDU     | THETTATH       | TRIVANDRUM  | NULL       |
+|  9 | GAFOOR   | VALIYAVEETIL   | TRISSUR     | NULL       |
++----+----------+----------------+-------------+------------+
+8 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------
+2. Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
+
+mysql> delimiter //
+mysql> create trigger product_price
+    -> before insert
+    -> on PRODUCT
+    -> for each row
+    -> begin
+    -> if new.PRICE < 50 then
+    -> set new.PRICE=60;
+    -> end IF;
+    -> end
+    -> //
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from PRODUCT;
+    -> //
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  40.70 |
+| 102 | SOAP POWDER |  86.60 |
+| 103 | BODY LOTION | 311.00 |
+| 104 | SHAMPOO     | 719.51 |
+| 105 | CONDITIONER | 209.00 |
+| 106 | CHOCLATE    | 311.51 |
+| 107 | NUTS        | 617.00 |
++-----+-------------+--------+
+7 rows in set (0.00 sec)
+
+
+ mysql> insert into PRODUCT values(108,'PEN',50);
+    -> //
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from PRODUCT;
+    -> //
++-----+-------------+--------+
+| PID | PNAME       | PRICE  |
++-----+-------------+--------+
+| 101 | SOAP        |  40.70 |
+| 102 | SOAP POWDER |  86.60 |
+| 103 | BODY LOTION | 311.00 |
+| 104 | SHAMPOO     | 719.51 |
+| 105 | CONDITIONER | 209.00 |
+| 106 | CHOCLATE    | 311.51 |
+| 107 | NUTS        | 617.00 |
+| 108 | PEN         |  50.00 |
++-----+-------------+--------+
+8 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------------
+
 
