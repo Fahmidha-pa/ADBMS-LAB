@@ -37,3 +37,4 @@ mysql> select PNAME,PRICE,range_price(price) from PRODUCT order by PRICE;
 +-------------+--------+--------------------+
 7 rows in set (0.00 sec)
 
+//VERIFIED
