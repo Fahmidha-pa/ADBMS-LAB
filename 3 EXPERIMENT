@@ -1,1 +1,240 @@
+                                               Assignment 3: NoSQL-CRUD
+                                                ************************
 
+
+    //1.      Write a MongoDB query to create an INVOICE database and collections (CUSTOMER, PRODUCT) and its corresponding documents.
+    
+ test> use invoice
+switched to db invoice
+
+invoice> db.customers.insertMany([{cid:"1",name:"femi",age:"21",city:"trissur",phone:"9544350834"},{cid:"2",name:"kuttu",age:"22",city:"vayanad",phone:"9544350844"},{cid:"3",name:"hiba",age:"24",city:"calicut",phone:"9544350854"},{cid:"4",name:"saju",age:"21",city:"trissur",phone:"9544350864"},{cid:"5",name:"nasi",age:"28",city:"kannur",phone:"9544350874"},{cid:"6",name:"sham",age:"28",city:"malappuram",phone:"9544350884"},{cid:"7",name:"aali",age:"23",city:"ernakulam",phone:"9544350894"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64817bd1bd56c90bb71667c8"),
+    '1': ObjectId("64817bd1bd56c90bb71667c9"),
+    '2': ObjectId("64817bd1bd56c90bb71667ca"),
+    '3': ObjectId("64817bd1bd56c90bb71667cb"),
+    '4': ObjectId("64817bd1bd56c90bb71667cc"),
+    '5': ObjectId("64817bd1bd56c90bb71667cd"),
+    '6': ObjectId("64817bd1bd56c90bb71667ce")
+  }
+}
+
+
+
+invoice> db.products.insertMany([{pid:"101",pname:"pen",price:"5"},{pid:"102",pname:"book",price:"55"},{pid:"103",pname:"soap",price:"25"},{pid:"104",pname:"shampoo",price:"125"},{pid:"105",pname:"bag",price:"300"},{pid:"106",pname:"pencil",price:"15"},{pid:"107",pname:"bag",price:"300"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64817dbabd56c90bb71667cf"),
+    '1': ObjectId("64817dbabd56c90bb71667d0"),
+    '2': ObjectId("64817dbabd56c90bb71667d1"),
+    '3': ObjectId("64817dbabd56c90bb71667d2"),
+    '4': ObjectId("64817dbabd56c90bb71667d3"),
+    '5': ObjectId("64817dbabd56c90bb71667d4"),
+    '6': ObjectId("64817dbabd56c90bb71667d5")
+  }
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+    //2.      Write a MongoDB query to find all documents from the collection CUSTOMER
+ 
+invoice> db.customers.find()
+[
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c8"),
+    cid: '1',
+    name: 'femi',
+    age: '21',
+    city: 'trissur',
+    phone: '9544350834'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c9"),
+    cid: '2',
+    name: 'kuttu',
+    age: '22',
+    city: 'vayanad',
+    phone: '9544350844'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667ca"),
+    cid: '3',
+    name: 'hiba',
+    age: '24',
+    city: 'calicut',
+    phone: '9544350854'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cb"),
+    cid: '4',
+    name: 'saju',
+    age: '21',
+    city: 'trissur',
+    phone: '9544350864'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cc"),
+    cid: '5',
+    name: 'nasi',
+    age: '28',
+    city: 'kannur',
+    phone: '9544350874'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cd"),
+    cid: '6',
+    name: 'sham',
+    age: '28',
+    city: 'malappuram',
+    phone: '9544350884'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667ce"),
+    cid: '7',
+    name: 'aali',
+    age: '23',
+    city: 'ernakulam',
+    phone: '9544350894'
+  }
+]
+
+--------------------------------------------------------------------------------------------------------------------------------------
+    //3.      Write a MongoDB query to update the city in the collection CUSTOMER.
+
+
+invoice> db.customers.update({'city':"trissur"},{$set:{'city':"palakkad"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+
+
+invoice> db.customers.find()
+[
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c8"),
+    cid: '1',
+    name: 'femi',
+    age: '21',
+    city: 'palakkad',
+    phone: '9544350834'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c9"),
+    cid: '2',
+    name: 'kuttu',
+    age: '22',
+    city: 'vayanad',
+    phone: '9544350844'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667ca"),
+    cid: '3',
+    name: 'hiba',
+    age: '24',
+    city: 'calicut',
+    phone: '9544350854'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cb"),
+    cid: '4',
+    name: 'saju',
+    age: '21',
+    city: 'trissur',
+    phone: '9544350864'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cc"),
+    cid: '5',
+    name: 'nasi',
+    age: '28',
+    city: 'kannur',
+    phone: '9544350874'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cd"),
+    cid: '6',
+    name: 'sham',
+    age: '28',
+    city: 'malappuram',
+    phone: '9544350884'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667ce"),
+    cid: '7',
+    name: 'aali',
+    age: '23',
+    city: 'ernakulam',
+    phone: '9544350894'
+  }
+]
+
+
+
+    
+--------------------------------------------------------------------------------------------------------------------------------------
+    //4.      Write a MongoDB query to delete the first matched document whose city is “Calicut”.
+    
+invoice> db.customers.deleteOne({city:"calicut"})
+{ acknowledged: true, deletedCount: 1 }
+invoice> db.customers.find()
+[
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c8"),
+    cid: '1',
+    name: 'femi',
+    age: '21',
+    city: 'palakkad',
+    phone: '9544350834'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c9"),
+    cid: '2',
+    name: 'kuttu',
+    age: '22',
+    city: 'vayanad',
+    phone: '9544350844'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cb"),
+    cid: '4',
+    name: 'saju',
+    age: '21',
+    city: 'trissur',
+    phone: '9544350864'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cc"),
+    cid: '5',
+    name: 'nasi',
+    age: '28',
+    city: 'kannur',
+    phone: '9544350874'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cd"),
+    cid: '6',
+    name: 'sham',
+    age: '28',
+    city: 'malappuram',
+    phone: '9544350884'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667ce"),
+    cid: '7',
+    name: 'aali',
+    age: '23',
+    city: 'ernakulam',
+    phone: '9544350894'
+  }
+]
+
+
+
+
+                *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
