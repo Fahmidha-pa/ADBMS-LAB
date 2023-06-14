@@ -1,1 +1,87 @@
+                              Assignment 5: NoSQL – AGGREGATE FUNCTIONS AND REGULAR EXPRESSIONS
+                               -----------------------------------------------------------------
 
+ 
+   //1.    Write a MongoDB query to sort customer details in ascending order of their name.
+   
+invoice> db.customers.find().sort({name:1})
+[
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667ce"),
+    cid: '7',
+    name: 'aali',
+    age: '23',
+    city: 'ernakulam',
+    phone: '9544350894'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c8"),
+    cid: '1',
+    name: 'femi',
+    age: '21',
+    city: 'palakkad',
+    phone: '9544350834'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c9"),
+    cid: '2',
+    name: 'kuttu',
+    age: '22',
+    city: 'vayanad',
+    phone: '9544350844'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cc"),
+    cid: '5',
+    name: 'nasi',
+    age: '28',
+    city: 'kannur',
+    phone: '9544350874'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cb"),
+    cid: '4',
+    name: 'saju',
+    age: '21',
+    city: 'trissur',
+    phone: '9544350864'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cd"),
+    cid: '6',
+    name: 'sham',
+    age: '28',
+    city: 'malappuram',
+    phone: '9544350884'
+  }
+]
+   
+----------------------------------------------------------------------------------------------------------------
+   //2.    Write a MongoDB query to count number of customers in each city.
+
+   
+invoice> db.customers.aggregate([{$group:{_id:"$city",total:{$sum:1}}}])
+[
+  { _id: 'trissur', total: 1 },
+  { _id: 'palakkad', total: 1 },
+  { _id: 'kannur', total: 1 },
+  { _id: 'ernakulam', total: 1 },
+  { _id: 'malappuram', total: 1 },
+  { _id: 'vayanad', total: 1 }
+]
+ 
+-----------------------------------------------------------------------------------------------------------------
+   //3.    Write a MongoDB query to find minimum and maximum age in each city.  
+  
+  
+invoice> db.customers.aggregate([{$group:{_id:"$city",max_age:{$max:"$age"},min_age:{$min:"$age"}}}])
+[
+  { _id: 'malappuram', max_age: '28', min_age: '28' },
+  { _id: 'kannur', max_age: '28', min_age: '28' },
+  { _id: 'ernakulam', max_age: '23', min_age: '23' },
+  { _id: 'trissur', max_age: '21', min_age: '21' },
+  { _id: 'palakkad', max_age: '21', min_age: '21' },
+  { _id: 'vayanad', max_age: '22', min_age: '22' }
+]
+
+                    *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *   *  *  *   *  *  *  *  *  *  *  *  *  *   *  *  *
