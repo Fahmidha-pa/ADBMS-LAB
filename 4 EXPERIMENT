@@ -1,0 +1,102 @@
+                                                 Assignment 4: Retrieving Data
+                                                 -----------------------------
+
+
+
+  //1.     Write a MongoDB query to display the customer documents having city ‘ekm’,’tsr’.
+  
+  invoice> db.customers.find({$or:[{"city":"ernakulam"},{"city":"trissur"}]}).pretty()
+[
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cb"),
+    cid: '4',
+    name: 'saju',
+    age: '21',
+    city: 'trissur',
+    phone: '9544350864'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667ce"),
+    cid: '7',
+    name: 'aali',
+    age: '23',
+    city: 'ernakulam',
+    phone: '9544350894'
+  }
+]
+
+  
+-------------------------------------------------------------------------------------------------------------------------------------
+  //2.     Write a MongoDB query to display all customer documents who have age >24.
+  
+  
+  invoice> db.customers.find({"age":{$gt:'24'}}).pretty()
+[
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cc"),
+    cid: '5',
+    name: 'nasi',
+    age: '28',
+    city: 'kannur',
+    phone: '9544350874'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cd"),
+    cid: '6',
+    name: 'sham',
+    age: '28',
+    city: 'malappuram',
+    phone: '9544350884'
+  }
+]
+
+  -------------------------------------------------------------------------------------------------------------------------------------
+  //3.     Write a MongoDB query to find customer documents who not live in ‘trissur’.
+  
+  invoice> db.customers.find({"city":{$ne:"trissur"}})
+[
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c8"),
+    cid: '1',
+    name: 'femi',
+    age: '21',
+    city: 'palakkad',
+    phone: '9544350834'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667c9"),
+    cid: '2',
+    name: 'kuttu',
+    age: '22',
+    city: 'vayanad',
+    phone: '9544350844'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cc"),
+    cid: '5',
+    name: 'nasi',
+    age: '28',
+    city: 'kannur',
+    phone: '9544350874'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667cd"),
+    cid: '6',
+    name: 'sham',
+    age: '28',
+    city: 'malappuram',
+    phone: '9544350884'
+  },
+  {
+    _id: ObjectId("64817bd1bd56c90bb71667ce"),
+    cid: '7',
+    name: 'aali',
+    age: '23',
+    city: 'ernakulam',
+    phone: '9544350894'
+  }
+]
+
+  
+                 
+                 *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
