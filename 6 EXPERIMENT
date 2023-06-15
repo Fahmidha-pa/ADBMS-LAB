@@ -1,0 +1,100 @@
+                                        Assignment No: 6 NoSQL – ADMINISTRATION
+                                        ---------------------------------------
+
+  //1.    Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database.
+
+test> use admin
+switched to db admin
+admin> db.createUser({user:"femi",pwd:"1234",roles:[{role:"read",db:"invoice"},]})
+{ ok: 1 }
+admin> 
+[1]+  Stopped                 mongosh
+
+ksb@ksb-H410M-S2-V2:~$ sudo mongosh -u femi -p 1234
+[sudo] password for ksb: 
+Current Mongosh Log ID:	648add8ea8be944bc3e588d6
+Connecting to:		mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.8.2
+Using MongoDB:		6.0.6
+Using Mongosh:		1.8.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+------
+   The server generated these startup warnings when booting
+   2023-06-15T14:19:05.315+05:30: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-06-15T14:19:05.891+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-06-15T14:19:05.891+05:30: vm.max_map_count is too low
+------
+
+-------------------------------------------------------------------------------------------------------------
+  //2.    Write a MongoDB query to create the backup for the INVOICE database. 
+
+$ mongodump --db invoice
+2023-06-15T15:32:38.002+0530	writing invoice.customers to dump/invoice/customers.bson
+2023-06-15T15:32:38.003+0530	writing invoice.product to dump/invoice/product.bson
+2023-06-15T15:32:38.004+0530	done dumping invoice.product (0 documents)
+2023-06-15T15:32:38.005+0530	done dumping invoice.customers (6 documents)
+2023-06-15T15:32:38.006+0530	writing invoice.products to dump/invoice/products.bson
+2023-06-15T15:32:38.006+0530	done dumping invoice.products (7 documents)
+
+-------------------------------------------------------------------------------------------------------------
+  //3.    Write a MongoDB query to restore a particular database or a collection.
+
+test> show dbs
+admin    180.00 KiB
+config   108.00 KiB
+femi      72.00 KiB
+invoice  120.00 KiB
+local     72.00 KiB
+mydb      16.00 KiB
+
+test> use invoice
+switched to db invoice
+
+invoice> db.dropDatabase()
+{ ok: 1, dropped: 'invoice' }
+
+show dbs
+admin   180.00 KiB
+config  108.00 KiB
+femi     72.00 KiB
+local    72.00 KiB
+mydb     16.00 KiB
+
+mongorestore --db invoice dump/invoice
+2023-06-15T15:35:57.977+0530	The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
+2023-06-15T15:35:57.977+0530	building a list of collections to restore from dump/invoice dir
+2023-06-15T15:35:57.978+0530	reading metadata for invoice.product from dump/invoice/product.metadata.json
+2023-06-15T15:35:57.978+0530	reading metadata for invoice.products from dump/invoice/products.metadata.json
+2023-06-15T15:35:57.978+0530	reading metadata for invoice.customers from dump/invoice/customers.metadata.json
+2023-06-15T15:35:57.988+0530	restoring invoice.customers from dump/invoice/customers.bson
+2023-06-15T15:35:57.991+0530	restoring invoice.products from dump/invoice/products.bson
+2023-06-15T15:35:57.993+0530	restoring invoice.product from dump/invoice/product.bson
+2023-06-15T15:35:58.000+0530	finished restoring invoice.customers (6 documents, 0 failures)
+2023-06-15T15:35:58.001+0530	finished restoring invoice.products (7 documents, 0 failures)
+2023-06-15T15:35:58.003+0530	finished restoring invoice.product (0 documents, 0 failures)
+2023-06-15T15:35:58.003+0530	no indexes to restore for collection invoice.products
+2023-06-15T15:35:58.003+0530	no indexes to restore for collection invoice.product
+2023-06-15T15:35:58.003+0530	no indexes to restore for collection invoice.customers
+2023-06-15T15:35:58.003+0530	13 document(s) restored successfully. 0 document(s) failed to restore.
+
+test> show dbs
+admin    180.00 KiB
+config   108.00 KiB
+femi      72.00 KiB
+invoice   88.00 KiB
+local     72.00 KiB
+mydb      16.00 KiB
+
+
+
+
+
+
+
+
+         *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  * 
