@@ -1,1 +1,19 @@
+                                       Assignment No: 7- NoSQL Shell Commands
+                                      --------------------------------------
+
+
+  //1.    Write a MongoDB query to create an index for the collection customer using the field customer_name.
+
+invoice> show collections
+customers
+product
+products
+
+invoice> db.customers.createIndex( { name:1 }, { name:"customers name index"})
+customers name index
+invoice> db.customers.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { name: 1 }, name: 'customers name index' }
+]
 
