@@ -17,3 +17,4 @@ invoice> db.customers.getIndexes()
   { v: 2, key: { name: 1 }, name: 'customers name index' }
 ]
 
+//VERIFIED
